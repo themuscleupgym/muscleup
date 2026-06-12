@@ -1,0 +1,468 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@700&display=swap');
+
+@import "tailwindcss";
+
+/* =====================================================
+   TAILWIND CSS V4 NATIVE THEME CONFIGURATION
+   ===================================================== */
+@theme {
+  /* Core Luxury Palette */
+  --color-obsidian: #050505;
+  --color-obsidian-50: #0c0c0e;
+  --color-obsidian-100: #101012;
+  --color-obsidian-200: #141417;
+  --color-obsidian-300: #1a1a1f;
+  --color-obsidian-400: #22222a;
+  
+  --color-graphite: #121214;
+  --color-graphite-light: #18181c;
+  --color-graphite-medium: #222228;
+  --color-graphite-muted: #33333d;
+  --color-graphite-soft: #4a4a5a;
+
+  --color-gold: #c5a059;
+  --color-gold-light: #e2c889;
+  --color-gold-dim: #9b7e3e;
+  --color-gold-muted: #725a27;
+  --color-gold-pale: #f3e5c8;
+  --color-gold-glow: #eccb82;
+
+  --color-silver: #f3f3f5;
+  --color-silver-dim: #a8a8b0;
+  --color-silver-muted: #787880;
+  --color-silver-deep: #4a4a52;
+
+  --color-ivory: #faf8f5;
+  --color-cream: #f4eee1;
+
+  /* Typography Pairing */
+  --font-display: "Outfit", "Inter", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-accent: "Space Grotesk", sans-serif;
+  --font-wide: "Syncopate", "Space Grotesk", sans-serif;
+
+  /* Spacing */
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+  --spacing-26: 6.5rem;
+  --spacing-30: 7.5rem;
+  --spacing-34: 8.5rem;
+  --spacing-38: 9.5rem;
+  --spacing-42: 10.5rem;
+  --spacing-section: clamp(6rem, 12vw, 12rem);
+
+  /* Border Radii */
+  --radius-4xl: 2rem;
+  --radius-5xl: 3rem;
+
+  /* Animations & Keyframes */
+  --animate-shimmer: shimmer 3s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 8s ease-in-out infinite;
+  --animate-pulse-gold: pulseGold 2s ease-in-out infinite;
+  --animate-spin-slow: spin 12s linear infinite;
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-marquee-reverse: marquee 30s linear infinite reverse;
+  --animate-fade-up: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  --animate-fade-in: fadeIn 0.5s ease-out forwards;
+  --animate-scale-in: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Custom Keyframes */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(0.5deg); }
+}
+@keyframes pulseGold {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* =====================================================
+   BASE RESET & GLOBAL STYLES
+   ===================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  background-color: #050505;
+}
+
+body {
+  background-color: #050505;
+  color: #f3f3f5;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  cursor: none; /* Custom cursor active */
+}
+
+@media (max-width: 1024px) {
+  body {
+    cursor: auto;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #9b7e3e;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c5a059;
+}
+
+/* Selection style */
+::selection {
+  background: rgba(197, 160, 89, 0.25);
+  color: #e2c889;
+}
+
+/* =====================================================
+   TYPOGRAPHY PRESETS
+   ===================================================== */
+.font-display { font-family: 'Outfit', sans-serif; }
+.font-body { font-family: 'Inter', sans-serif; }
+.font-accent { font-family: 'Space Grotesk', sans-serif; }
+.font-wide { font-family: 'Syncopate', sans-serif; }
+
+/* Metallic Gradients */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #9b7e3e 0%, #e2c889 40%, #c5a059 70%, #725a27 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  animation: shimmer 4s linear infinite;
+}
+
+.text-silver-gradient {
+  background: linear-gradient(135deg, #787880 0%, #f3f3f5 50%, #a8a8b0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =====================================================
+   ULTRA-PREMIUM GLASSMORPHISM
+   ===================================================== */
+.glass-premium {
+  background: rgba(18, 18, 20, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.glass-gold {
+  background: rgba(197, 160, 89, 0.04);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(197, 160, 89, 0.12);
+}
+
+.glass-dark {
+  background: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* =====================================================
+   LUXURY BUTTONS
+   ===================================================== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1.1rem 2.8rem;
+  background: linear-gradient(135deg, #9b7e3e 0%, #c5a059 50%, #9b7e3e 100%);
+  background-size: 200% auto;
+  color: #050505;
+  font-family: 'Syncopate', sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 1px;
+  cursor: none;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.btn-primary:hover {
+  background-position: right center;
+  box-shadow: 0 0 25px rgba(197, 160, 89, 0.35);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1.05rem 2.8rem;
+  background: transparent;
+  color: #e2c889;
+  font-family: 'Syncopate', sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid rgba(197, 160, 89, 0.25);
+  border-radius: 1px;
+  cursor: none;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.btn-secondary:hover {
+  background: rgba(197, 160, 89, 0.05);
+  border-color: #c5a059;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* =====================================================
+   PREMIUM CARDS
+   ===================================================== */
+.card-luxury {
+  background: #0c0c0e;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 2px;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-luxury::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(197, 160, 89, 0.03) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card-luxury:hover {
+  border-color: rgba(197, 160, 89, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.card-luxury:hover::before {
+  opacity: 1;
+}
+
+/* =====================================================
+   PREMIUM LABELS / TAGS
+   ===================================================== */
+.label-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Syncopate', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #c5a059;
+  padding: 0.45rem 1.1rem;
+  border: 1px solid rgba(197, 160, 89, 0.15);
+  border-radius: 1px;
+  background: rgba(197, 160, 89, 0.03);
+}
+
+.label-tag::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  background: #c5a059;
+  border-radius: 50%;
+  display: block;
+}
+
+/* =====================================================
+   DIAGNOSTIC / CALCULATOR INPUTS
+   ===================================================== */
+.calc-input {
+  background: #0c0c0e;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  color: #f3f3f5;
+  font-family: 'Space Grotesk', sans-serif;
+  padding: 0.85rem 1.2rem;
+  width: 100%;
+  transition: all 0.3s ease;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.calc-input:focus {
+  border-color: rgba(197, 160, 89, 0.4);
+  box-shadow: 0 0 15px rgba(197, 160, 89, 0.05);
+  background: #101012;
+}
+
+/* =====================================================
+   CURSOR & PAGE LOADER
+   ===================================================== */
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #050505;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: #c5a059;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, background 0.3s;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: all 0.1s ease-out;
+}
+
+.cursor-ring.hover {
+  width: 50px;
+  height: 50px;
+  border-color: #eccb82;
+  background: rgba(197, 160, 89, 0.04);
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #9b7e3e, #c5a059, #eccb82);
+  z-index: 9999;
+  transform-origin: left;
+}
+
+/* =====================================================
+   LAYOUT UTILITIES
+   ===================================================== */
+.container-luxury {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 4rem);
+}
+
+.section-padding {
+  padding: clamp(6rem, 12vw, 12rem) 0;
+}
+
+.section-padding-sm {
+  padding: clamp(4rem, 8vw, 8rem) 0;
+}
+
+.divider-gold {
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c5a059, transparent);
+  margin: 1.5rem auto;
+}
+
+.divider-left {
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(90deg, #c5a059, transparent);
+}
+
+/* Custom text stroke for luxury numbers */
+.text-stroke {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
+}
+.text-stroke-gold {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(197, 160, 89, 0.2);
+}
+
+/* =====================================================
+   NAVBAR
+   ===================================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.navbar.scrolled {
+  background: rgba(5, 5, 5, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* =====================================================
+   SCROLL PRESETS
+   ===================================================== */
+.horizontal-scroll {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.horizontal-scroll::-webkit-scrollbar { display: none; }
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
